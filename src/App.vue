@@ -36,10 +36,6 @@
 	const goBack = () => {
 		router.back()
 	}
-
-	const closeModal = () => {
-		store.commit('modals/closeModal')
-	}
 </script>
 
 <template>
@@ -62,7 +58,6 @@
 					<BaseButton @click="openProfile">
 						<UserIcon class="h-6 w-6"/>
 					</BaseButton>
-					<BasePopup @closePopup="closeModal"/>
 				</div>
 			</div>
 		</section>
@@ -84,6 +79,9 @@
 			</div>
 		</section>
 	</footer>
+
+	<!-- Единый попап -->
+	<BasePopup/>
 </template>
 
 <style scoped>

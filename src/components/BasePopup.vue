@@ -9,8 +9,6 @@ import SignUp from './SignUp.vue'
 
 import CreateFlightRecord from './CreateFlightRecord.vue'
 
-const emits = defineEmits(['closePopup'])
-
 const store = useStore()
 
 const isOpen = computed(() => store.state.modals.isOpen)
@@ -23,6 +21,10 @@ const component = computed(() => {
 	}
 	return markRaw(lookUp[store.state.modals.component])
 })
+
+const closeModal = () => {
+	store.commit('modals/closeModal')
+}
 </script>
 
 <template>
@@ -32,10 +34,10 @@ const component = computed(() => {
 		            enter-active-class="transition duration-300"
 		            leave-active-class="transition duration-300">
 			<div class="fixed inset-0 z-10" v-if="isOpen">
-				<div class="bg-gray-700 opacity-50 w-full h-full cursor-pointer" @click="emits('closePopup')"></div>
+				<div class="bg-gray-700 opacity-50 w-full h-full cursor-pointer" @click=closeModal></div>
 				<div class="rounded-md bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col w-full lg:max-w-2xl h-full lg:h-auto justify-center">
 					<div class="flex w-full justify-end">
-						<button class="p-4 lg:hidden">
+						<button class="p-4 lg:hidden" @click="closeModal">
 							<XMarkIcon class="h-6 w-6"/>
 						</button>
 					</div>
