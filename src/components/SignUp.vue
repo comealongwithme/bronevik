@@ -21,6 +21,13 @@
 	const store = useStore()
 
 	const signUp = async () => {
+
+		// TODO: сделать нормальную валидацию
+		if (signUpData.value.password !== signUpData.value.passwordConfirm) {
+			alert('Пароли не совпадают')
+			return
+		}
+
 		try {
 
 			// регистрируемся через стор
@@ -73,7 +80,7 @@
 			<BaseButton @click="signUp" :is-loading="store.state.users.isLoading">Sign up</BaseButton>
 		</div>
 		<div class="text-center">
-			<h3>Or <button class="underline hover:no-underline" @click="showSignIn">Sign up</button> instead</h3>
+			<h3>Or <button class="underline hover:no-underline" @click="showSignIn">Sign in</button> instead</h3>
 		</div>
 	</article>
 </template>
