@@ -17,8 +17,6 @@
 
 	const isAdmin = computed(() => store.state.users.currentUser.role === UserRole.admin)
 
-	const query = ref<string>()
-
 	const getList = (force: boolean) => {
 		store.dispatch('flights/getList', { pb, page: 1, perPage: 50, force }).then(list => {
 			flights.value = Array.from(list.values())
@@ -28,10 +26,6 @@
 	const openCreateFlightPopup = () => {
 		store.commit('modals/openModal', 'CreateFlightRecord')
 	}
-
-	watch(query, () => {
-
-	})
 
 	onMounted(() => {
 		getList(false)
@@ -49,7 +43,6 @@
 	</template>
 	<section class="container">
 		<div class="space-y-4">
-			<BaseInput id="query" type="text" v-model="query" @input=""/>
 			<div class="flex flex-col space-y-4">
 				<router-link v-for="flight of flights" :to="`/flight/${flight.id}`">
 					<article class="border rounded-md p-4 space-y-4 transition hover:bg-gray-100" :key="flight.id">
